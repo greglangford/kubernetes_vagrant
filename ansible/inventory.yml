@@ -1,0 +1,16 @@
+all:
+  children:
+    masters:
+      hosts:
+        ubuntu-1:
+          ansible_host: 192.168.255.10
+          ansible_user: vagrant
+          ansible_ssh_private_key_file: ../.vagrant/machines/ubuntu-1/virtualbox/private_key
+        ubuntu-2:
+          ansible_host: 192.168.255.11
+          ansible_user: vagrant
+          ansible_ssh_private_key_file: ../.vagrant/machines/ubuntu-2/virtualbox/private_key
+        ubuntu-3:
+          ansible_host: 192.168.255.12
+          ansible_user: vagrant
+          ansible_ssh_private_key_file: ../.vagrant/machines/ubuntu-3/virtualbox/private_key

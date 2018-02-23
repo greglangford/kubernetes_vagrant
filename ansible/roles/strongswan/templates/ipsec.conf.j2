@@ -1,0 +1,21 @@
+# ipsec.conf - strongSwan IPsec configuration file
+
+# basic configuration
+
+config setup
+	# strictcrlpolicy=yes
+	# uniqueids = no
+
+# Add connections here.
+
+{% if strongswan_connections %}
+{% for connection in strongswan_connections %}
+conn {{ connection.name }}
+{% for key, value in connection.items() %}
+{% if key != 'name' %}
+	{{ key }}={{ value }}
+{% endif %}
+{% endfor %}
+
+{% endfor %}
+{% endif %}
