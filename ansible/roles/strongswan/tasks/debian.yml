@@ -1,14 +1,9 @@
 ###################################################################################################
 
-- name: debian | vars
-  include_vars: '{{ ansible_os_family | lower }}.yml'
-
-###################################################################################################
-
 - name: debian | package
   apt:
     name: '{{ strongswan_package_name }}'
-    state: present
+    state: '{{ strongswan_package_state }}'
 
 ###################################################################################################
 
@@ -31,5 +26,13 @@
     group: 'root'
     mode: '0600'
   notify: restart strongswan
+
+###################################################################################################
+
+- name: debian | service
+  service:
+    name    : '{{ strongswan_service_name }}'
+    enabled : '{{ strongswan_service_enabled }}'
+    state   : '{{ strongswan_service_state }}'
 
 ###################################################################################################

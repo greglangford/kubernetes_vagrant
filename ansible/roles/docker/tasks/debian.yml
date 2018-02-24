@@ -1,9 +1,17 @@
 ###################################################################################################
 
-- include_vars: '{{ ansible_os_family | lower }}.yml'
+- name: debian | packages
+  apt:
+    name  : '{{ item }}'
+    state : '{{ docker_package_state }}'
+  with_items: '{{ docker_packages }}'
 
 ###################################################################################################
 
-- include_tasks: '{{ ansible_os_family | lower }}.yml'
+- name: debian | service
+  service:
+    name    : '{{ docker_service_name }}'
+    enabled : '{{ docker_service_enabled }}'
+    state   : '{{ docker_service_state }}'
 
 ###################################################################################################

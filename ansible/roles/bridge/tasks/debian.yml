@@ -1,0 +1,33 @@
+###################################################################################################
+
+- name: debian | assert
+  assert:
+    that:
+      - '{{ item.name is defined }}'
+      - '{{ item.subnet is defined }}'
+      - '{{ item.cidr is defined }}'
+      - '{{ item.ports is defined }}'
+      - '{{ item.filename is defined }}'
+  with_items: '{{ bridge_bridges }}'
+
+###################################################################################################
+
+- name: debian | packages
+  apt:
+    name  : '{{ item }}'
+    state : present
+  with_items: '{{ bridge_packages }}'
+
+###################################################################################################
+
+- name: debian | template
+  template:
+    src   : bridge.j2
+    dest  : '/etc/network/interfaces.d/{{ item.filename }}'
+    owner : root
+    group : root
+    mode  : 0644
+  with_items: '{{ bridge_bridges }}'
+  notify: restart network
+
+###################################################################################################

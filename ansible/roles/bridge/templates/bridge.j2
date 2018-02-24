@@ -1,0 +1,5 @@
+auto {{ item.name }}
+iface {{ item.name }} inet static
+  address {{ item.subnet }}
+  netmask {{ item.cidr }}
+  bridge_ports {{ item.ports }}

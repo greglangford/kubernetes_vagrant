@@ -1,27 +1,39 @@
 ###################################################################################################
 
 ipsec_left            : 192.168.255.10
-docker_bridge_subnet  : 10.10.0.0/24
+docker_bridge_subnet  : 10.10.0.0
+docker_bridge_cidr    : 24
+
+###################################################################################################
+
+bridge_bridges:
+  - name      : cbr0
+    subnet    : '{{ docker_bridge_subnet }}'
+    cidr      : '{{ docker_bridge_cidr }}'
+    ports     : none
+    filename  : '99-cbr0.cfg'
 
 ###################################################################################################
 
 strongswan_connections:
   - name        : 192.168.255.11
     left        : '{{ ipsec_left }}'
-    leftsubnet  : '{{ docker_bridge_subnet }}'
+    leftsubnet  : '{{ docker_bridge_subnet }}/{{ docker_bridge_cidr }}'
     right       : 192.168.255.11
     rightsubnet : 10.11.0.0/24
     rightid     : 192.168.255.11
     authby      : psk
+    type        : 'tunnel'
     auto        : start
 
   - name        : 192.168.255.12
     left        : '{{ ipsec_left }}'
-    leftsubnet  : '{{ docker_bridge_subnet }}'
+    leftsubnet  : '{{ docker_bridge_subnet }}/{{ docker_bridge_cidr }}'
     right       : 192.168.255.12
     rightsubnet : 10.12.0.0/24
     rightid     : 192.168.255.12
     authby      : psk
+    type        : 'tunnel'
     auto        : start
 
 ###################################################################################################

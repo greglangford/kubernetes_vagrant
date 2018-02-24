@@ -1,5 +1,11 @@
 ###################################################################################################
 
+strongswan_package_state    : present
+strongswan_service_enabled  : yes
+strongswan_service_state    : started
+
+###################################################################################################
+
 strongswan_connections  : []
 strongswan_secrets      : []
 

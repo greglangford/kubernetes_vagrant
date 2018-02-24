@@ -2,4 +2,6 @@
 - hosts: masters
   become: true
   roles:
+    - bridge
     - strongswan
+    - docker
