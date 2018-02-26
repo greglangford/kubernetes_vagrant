@@ -1,5 +1,5 @@
 auto {{ item.name }}
 iface {{ item.name }} inet static
-  address {{ item.subnet }}
+  address {{ item.address }}
   netmask {{ item.cidr }}
   bridge_ports {{ item.ports }}

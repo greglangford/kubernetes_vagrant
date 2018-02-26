@@ -4,7 +4,7 @@
   assert:
     that:
       - '{{ item.name is defined }}'
-      - '{{ item.subnet is defined }}'
+      - '{{ item.address is defined }}'
       - '{{ item.cidr is defined }}'
       - '{{ item.ports is defined }}'
       - '{{ item.filename is defined }}'

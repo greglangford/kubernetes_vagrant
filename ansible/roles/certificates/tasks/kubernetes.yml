@@ -1,0 +1,41 @@
+###################################################################################################
+
+- name: kubernetes | file | pki
+  file:
+    dest: /etc/kubernetes/pki
+    state: directory
+    owner: root
+    group: root
+    mode: 0644
+
+###################################################################################################
+
+- name: kubernetes | copy | ca.pem
+  copy:
+    src: kubernetes/ca.pem
+    dest: /etc/kubernetes/pki/ca.pem
+    owner: root
+    group: root
+    mode: 0644
+
+###################################################################################################
+
+- name: kubernetes | copy | kubelet-client.pem
+  copy:
+    src: kubernetes/kubelet-client.pem
+    dest: /etc/kubernetes/pki/kubelet-client.pem
+    owner: root
+    group: root
+    mode: 0644
+
+###################################################################################################
+
+- name: kubernetes | copy | kubelet-client-key.pem
+  copy:
+    src: kubernetes/kubelet-client-key.pem
+    dest: /etc/kubernetes/pki/kubelet-client-key.pem
+    owner: root
+    group: root
+    mode: 0644
+
+###################################################################################################

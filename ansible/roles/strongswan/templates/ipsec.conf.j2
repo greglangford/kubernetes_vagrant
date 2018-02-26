@@ -6,6 +6,9 @@ config setup
 	# strictcrlpolicy=yes
 	# uniqueids = no
 
+conn %defaults
+	keyexchange=ikev2
+
 # Add connections here.
 
 {% if strongswan_connections %}
