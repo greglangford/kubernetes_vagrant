@@ -1,0 +1,53 @@
+###################################################################################################
+
+kubernetes_kubelet_systemd_config_filename  : 99-kubelet.conf
+kubernetes_kubelet_systemd_config_directory : /etc/systemd/system/kubelet.service.d
+kubernetes_kubelet_systemd_config_file      : '{{ kubernetes_kubelet_systemd_config_directory }}/{{ kubernetes_kubelet_systemd_config_filename }}'
+
+###################################################################################################
+
+kubernetes_kubelet_config_filename    : kubelet.conf
+kubernetes_kubelet_config_file        : '{{ kubernetes_config_path }}/{{ kubernetes_kubelet_config_filename }}'
+kubernetes_kubelet_pod_manifests_path : '{{ kubernetes_config_path }}/manifests'
+
+###################################################################################################
+
+kubernetes_kubelet_client_cert_filename     : kubelet-client.pem
+kubernetes_kubelet_client_cert_key_filename : kubelet-client-key.pem
+kubernetes_kubelet_client_cert              : '{{ kubernetes_pki_path }}/{{ kubernetes_kubelet_client_cert_filename }}'
+kubernetes_kubelet_client_cert_key          : '{{ kubernetes_pki_path }}/{{ kubernetes_kubelet_client_cert_key_filename }}'
+
+###################################################################################################
+
+kubernetes_kubelet_cluster_dns    : 10.96.0.10
+kubernetes_kubelet_cluster_domain : cluster.local
+
+###################################################################################################
+
+kubernetes_kubelet_kubeconfig_args:
+  - '--kubeconfig={{ kubernetes_kubelet_config_file }}'
+
+kubernetes_kubelet_system_pod_args:
+  - '--pod-manifest-path={{ kubernetes_kubelet_pod_manifests_path }}'
+  - --allow-privileged=true
+
+kubernetes_kubelet_network_args:
+  - --network-plugin=cni
+  - --cni-conf-dir=/etc/cni/net.d
+  - --cni-bin-dir=/opt/cni/bin
+
+kubernetes_kubelet_dns_args:
+  - '--cluster-dns={{ kubernetes_kubelet_cluster_dns }}'
+  - '--cluster-domain={{ kubernetes_kubelet_cluster_domain }}'
+
+kubernetes_kubelet_authz_args:
+  - --authorization-mode=Webhook
+  - '--client-ca-file={{ kubernetes_pki_ca_cert }}'
+
+kubernetes_kubelet_cadvisor_args:
+  - --cadvisor-port=0
+
+kubernetes_kubelet_certificate_args:
+  - --cert-dir=/var/lib/kubelet/pki
+
+###################################################################################################

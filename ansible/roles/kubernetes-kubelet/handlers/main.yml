@@ -1,13 +1,13 @@
 ###################################################################################################
 
-- name: systemctl daemon-reload
+- name: systemd daemon-reload
   command: systemctl daemon-reload
 
 ###################################################################################################
 
-- name: restart etcd
+- name: restart kubelet
   service:
-    name: etcd
+    name: '{{ kubernetes_kubelet_service_name }}'
     state: restarted
 
 ###################################################################################################

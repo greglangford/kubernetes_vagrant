@@ -1,12 +1,11 @@
 ###################################################################################################
 
-- name: template | etcd.yml
+- name: template | etcd.yaml
   template:
-    src: kubelet/manifests/etcd.yaml.j2
-    dest: '{{ kubernetes_kubelet_pod_manifests_path }}/etcd.yaml'
+    src: etcd.yaml.j2
+    dest: '{{ kubernetes_etcd_manifest_file }}'
     owner: root
     group: root
     mode: 0700
-  when: kubernetes_kubelet_manifests_etcd_enabled
 
 ###################################################################################################

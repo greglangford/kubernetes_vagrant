@@ -1,16 +1,9 @@
 ###################################################################################################
 
-- name: template | kubelet.conf
-  template:
-    src: kubelet/config/kubelet.conf.j2
-    dest: '{{ kubernetes_kubelet_config_file }}'
-    owner: root
-    group: root
-    mode: 0600
-  notify: kubelet
+- include_vars: '{{ ansible_os_family | lower }}.yml'
 
 ###################################################################################################
 
-- include_tasks: manifests/main.yml
+- include_tasks: '{{ ansible_os_family | lower }}.yml'
 
 ###################################################################################################

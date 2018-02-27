@@ -1,7 +1,6 @@
 ###################################################################################################
 
-etcd_docker_image         : '{{ etcd_docker_image_tag }}:{{ etcd_docker_image_version }}'
-etcd_docker_image_tag     : gcr.io/google_containers/etcd-amd64
-etcd_docker_image_version : 3.1.11
+dependencies:
+  - { role: kubernetes }
 
 ###################################################################################################

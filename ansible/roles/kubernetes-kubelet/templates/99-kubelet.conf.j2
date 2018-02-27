@@ -1,0 +1,10 @@
+[Service]
+Environment="KUBELET_KUBECONFIG_ARGS={{ kubernetes_kubelet_kubeconfig_args | join(' ') }}"
+Environment="KUBELET_SYSTEM_PODS_ARGS={{ kubernetes_kubelet_system_pod_args | join(' ') }}"
+Environment="KUBELET_NETWORK_ARGS={{ kubernetes_kubelet_network_args | join(' ') }}"
+Environment="KUBELET_DNS_ARGS={{ kubernetes_kubelet_dns_args | join(' ') }}"
+Environment="KUBELET_AUTHZ_ARGS={{ kubernetes_kubelet_authz_args | join(' ') }}"
+Environment="KUBELET_CADVISOR_ARGS={{ kubernetes_kubelet_cadvisor_args | join(' ') }}"
+Environment="KUBELET_CERTIFICATE_ARGS={{ kubernetes_kubelet_certificate_args | join(' ') }}"
+ExecStart=
+ExecStart=/usr/bin/kubelet $KUBELET_KUBECONFIG_ARGS $KUBELET_SYSTEM_PODS_ARGS $KUBELET_NETWORK_ARGS $KUBELET_DNS_ARGS $KUBELET_AUTHZ_ARGS $KUBELET_CADVISOR_ARGS $KUBELET_CERTIFICATE_ARGS $KUBELET_EXTRA_ARGS

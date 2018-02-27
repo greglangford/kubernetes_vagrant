@@ -51,3 +51,16 @@ strongswan_secrets:
     psk   : letmein
 
 ###################################################################################################
+
+kubernetes_etcd_listen_client_host    : 192.168.255.10
+kubernetes_etcd_listen_peer_urls      : http://192.168.255.10:2380
+kubernetes_etcd_listen_client_urls    : http://192.168.255.10:2379
+kubernetes_etcd_advertise_client_urls : http://192.168.255.10:2379
+
+kubernetes_etcd_docker_arguments:
+  - --name=etcd1
+  - --initial-advertise-peer-urls=http://192.168.255.10:2380
+  - --initial-cluster=etcd1=http://192.168.255.10:2380,etcd2=http://192.168.255.11:2380,etcd3=http://192.168.255.12:2380
+  - --initial-cluster-token=etcd-kubernetes
+
+###################################################################################################

@@ -2,10 +2,10 @@
 
 kubernetes_repo_key_state : present
 kubernetes_repo_state     : present
+kubernetes_packages_state : present
 
 ###################################################################################################
 
-kubernetes_packages_state : present
 kubernetes_packages:
   - kubelet
   - kubeadm
@@ -13,26 +13,16 @@ kubernetes_packages:
 
 ###################################################################################################
 
-kubernetes_config_path              : /etc/kubernetes
+kubernetes_config_path  : /etc/kubernetes
+kubernetes_pki_path     : '{{ kubernetes_config_path }}/pki'
 
 ###################################################################################################
 
-kubernetes_kubelet_config_filename    : kubelet.conf
-kubernetes_kubelet_config_file        : '{{ kubernetes_config_path }}/{{ kubernetes_kubelet_config_filename }}'
-kubernetes_kubelet_pod_manifests_path : '{{ kubernetes_config_path }}/manifests'
+kubernetes_pki_ca_cert_filename : ca.pem
+kubernetes_pki_ca_cert          : '{{ kubernetes_pki_path }}/{{ kubernetes_pki_ca_cert_filename }}'
 
 ###################################################################################################
 
-kubernetes_kubelet_manifests_etcd_enabled               : no
-kubernetes_kubelet_manifests_etcd_listen_peer_host      : 127.0.0.1
-kubernetes_kubelet_manifests_etcd_listen_peer_port      : 2380
-kubernetes_kubelet_manifests_etcd_listen_peer_urls      : 'http://{{ kubernetes_kubelet_manifests_etcd_listen_peer_host }}:{{ kubernetes_kubelet_manifests_etcd_listen_peer_port }}'
-kubernetes_kubelet_manifests_etcd_listen_client_host    : 127.0.0.1
-kubernetes_kubelet_manifests_etcd_listen_client_port    : 2379
-kubernetes_kubelet_manifests_etcd_listen_client_urls    : 'http://{{ kubernetes_kubelet_manifests_etcd_listen_client_host }}:{{ kubernetes_kubelet_manifests_etcd_listen_client_port }}'
-kubernetes_kubelet_manifests_etcd_advertise_client_host : 127.0.0.1
-kubernetes_kubelet_manifests_etcd_advertise_client_port : 2379
-kubernetes_kubelet_manifests_etcd_advertise_client_urls : 'http://{{ kubernetes_kubelet_manifests_etcd_advertise_client_host }}:{{ kubernetes_kubelet_manifests_etcd_advertise_client_port }}'
-kubernetes_kubelet_manifests_etcd_data_directory        : /var/lib/etcd
+kubernetes_master_address: https://192.168.255.10:6443
 
 ###################################################################################################

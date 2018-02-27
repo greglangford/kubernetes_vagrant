@@ -1,0 +1,25 @@
+###################################################################################################
+
+- name: template | 99-kubelet.conf
+  template:
+    src: 99-kubelet.conf.j2
+    dest: '{{ kubernetes_kubelet_systemd_config_file }}'
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - systemd daemon-reload
+    - restart kubelet
+
+###################################################################################################
+
+- name: template | kubelet.conf
+  template:
+    src: kubelet.conf.j2
+    dest: '{{ kubernetes_kubelet_config_file }}'
+    owner: root
+    group: root
+    mode: 0600
+  notify: restart kubelet
+
+###################################################################################################

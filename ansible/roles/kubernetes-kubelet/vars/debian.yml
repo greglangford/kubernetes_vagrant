@@ -1,5 +1,5 @@
 ###################################################################################################
 
-kubernetes_kubelet_systemd_config_file  : /etc/systemd/system/kubelet.service.d/99-kubelet.conf
+kubernetes_kubelet_service_name: kubelet
 
 ###################################################################################################

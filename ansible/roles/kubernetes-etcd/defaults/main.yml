@@ -1,0 +1,36 @@
+###################################################################################################
+
+kubernetes_etcd_manifest_filename : etcd.yaml
+kubernetes_etcd_manifest_file     : '{{ kubernetes_kubelet_pod_manifests_path }}/{{ kubernetes_etcd_manifest_filename }}'
+
+###################################################################################################
+
+kubernetes_etcd_container_image: gcr.io/google_containers/etcd-amd64:3.1.11
+
+###################################################################################################
+
+kubernetes_etcd_data_directory: /var/lib/etcd
+
+###################################################################################################
+
+kubernetes_etcd_docker_arguments: []
+
+###################################################################################################
+
+kubernetes_etcd_listen_peer_host: 127.0.0.1
+kubernetes_etcd_listen_peer_port: 2380
+kubernetes_etcd_listen_peer_urls: 'http://{{ kubernetes_etcd_listen_peer_host }}:{{ kubernetes_etcd_listen_peer_port }}'
+
+###################################################################################################
+
+kubernetes_etcd_listen_client_host: 127.0.0.1
+kubernetes_etcd_listen_client_port: 2379
+kubernetes_etcd_listen_client_urls: 'http://{{ kubernetes_etcd_listen_client_host }}:{{ kubernetes_etcd_listen_client_port }}'
+
+###################################################################################################
+
+kubernetes_etcd_advertise_client_host: 127.0.0.1
+kubernetes_etcd_advertise_client_port: 2379
+kubernetes_etcd_advertise_client_urls: 'http://{{ kubernetes_etcd_advertise_client_host }}:{{ kubernetes_etcd_advertise_client_port }}'
+
+###################################################################################################

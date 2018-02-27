@@ -1,0 +1,47 @@
+#jinja2: trim_blocks: "true", lstrip_blocks: "false"
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    scheduler.alpha.kubernetes.io/critical-pod: ""
+  creationTimestamp: null
+  labels:
+    component: etcd
+    tier: control-plane
+  name: etcd
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - etcd
+    - --listen-peer-urls={{ kubernetes_etcd_listen_peer_urls }}
+    - --listen-client-urls={{ kubernetes_etcd_listen_client_urls }}
+    - --advertise-client-urls={{ kubernetes_etcd_advertise_client_urls }}
+    - --data-dir={{ kubernetes_etcd_data_directory }}
+    {% if kubernetes_etcd_docker_arguments %}
+    {% for argument in kubernetes_etcd_docker_arguments %}
+    - {{ argument }}
+    {% endfor %}
+    {% endif %}
+    image: {{ kubernetes_etcd_container_image }}
+    livenessProbe:
+      failureThreshold: 8
+      httpGet:
+        host: {{ kubernetes_etcd_listen_client_host }}
+        path: /health
+        port: {{ kubernetes_etcd_listen_client_port }}
+        scheme: HTTP
+      initialDelaySeconds: 15
+      timeoutSeconds: 15
+    name: etcd
+    resources: {}
+    volumeMounts:
+    - mountPath: {{ kubernetes_etcd_data_directory }}
+      name: etcd
+  hostNetwork: true
+  volumes:
+  - hostPath:
+      path: {{ kubernetes_etcd_data_directory }}
+      type: DirectoryOrCreate
+    name: etcd
+status: {}
